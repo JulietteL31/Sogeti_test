@@ -651,3 +651,125 @@ function OpenFormModif() {
         }
     })
 }
+
+
+// CHANGE STATE TODOS //
+
+/*Fonction au click sur le bouton done*/
+function ChangeStateDone() {
+    /*event listener sur le bouton*/
+    document.getElementById("button-change-done").addEventListener('click', () => {
+        /*récupération des checkbox dans un tableau*/
+        let allcheckbox = document.querySelectorAll(".checkbox-change-state");
+        /*boucle sur le tableau de checkbox*/
+        for(let i=0; i < allcheckbox.length; i++) {
+                    /*si la checkbox est cochée*/
+                    if(allcheckbox[i].checked) {
+                        let check = allcheckbox[i];
+                        /*on récupère la todo associée et son id*/
+                        let parent = check.closest('.item-todo-state');
+                        console.log(parent);
+                        let todoId = parent.lastElementChild.id;
+                        /*on crée une variable avec le nouveau state*/
+                        let newState = "done";
+                        console.log(todoId, newState);
+    
+                        /*on récupère la todo dans le local storage grâce à son id*/
+                        let productLocalStorage = JSON.parse(localStorage.getItem("todo"));
+    
+                        let todoChange = productLocalStorage.find(el => el.id === todoId);
+                        console.log(todoChange);
+    
+                        /*on met à jour le state de la todo*/
+                        todoChange.state = newState;
+    
+                        localStorage.setItem("todo", JSON.stringify(productLocalStorage));
+    
+                        let todos = JSON.parse(localStorage.getItem("todo"));
+                        DisplayTodos(todos);
+                        OpenTodo(todos);
+
+                        window.scroll({
+                            top: 1,
+                            left: 1,
+                            behavior: 'smooth'
+                          });
+                    }
+                }
+    })
+    
+}
+
+/*Fonction au click sur le bouton in progress*/
+/*Même logique que précédemment*/
+function ChangeStateProgress() {
+    document.getElementById("button-change-inprogress").addEventListener('click', () => {
+        let allcheckbox = document.querySelectorAll(".checkbox-change-state");
+        for(let i=0; i < allcheckbox.length; i++) {
+                    if(allcheckbox[i].checked) {
+                        let check = allcheckbox[i];
+                        let parent = check.closest('.item-todo-state');
+                        console.log(parent);
+                        let todoId = parent.lastElementChild.id;
+                        let newState = "in progress";
+                        console.log(todoId, newState);
+    
+                        let productLocalStorage = JSON.parse(localStorage.getItem("todo"));
+    
+                        let todoChange = productLocalStorage.find(el => el.id === todoId);
+                        console.log(todoChange);
+    
+                        todoChange.state = newState;
+    
+                        localStorage.setItem("todo", JSON.stringify(productLocalStorage));
+    
+                        let todos = JSON.parse(localStorage.getItem("todo"));
+                        DisplayTodos(todos);
+                        OpenTodo(todos);
+
+                        window.scroll({
+                            top: 1,
+                            left: 1,
+                            behavior: 'smooth'
+                          });
+                    }
+                }
+    })
+}
+
+/*Fonction au click sur le bouton todo*/
+/*Même logique que précédemment*/
+function ChangeStateTodo() {
+    document.getElementById("button-change-todo").addEventListener('click', () => {
+        let allcheckbox = document.querySelectorAll(".checkbox-change-state");
+        for(let i=0; i < allcheckbox.length; i++) {
+                    if(allcheckbox[i].checked) {
+                        let check = allcheckbox[i];
+                        let parent = check.closest('.item-todo-state');
+                        console.log(parent);
+                        let todoId = parent.lastElementChild.id;
+                        let newState = "todo";
+                        console.log(todoId, newState);
+    
+                        let productLocalStorage = JSON.parse(localStorage.getItem("todo"));
+    
+                        let todoChange = productLocalStorage.find(el => el.id === todoId);
+                        console.log(todoChange);
+    
+                        todoChange.state = newState;
+    
+                        localStorage.setItem("todo", JSON.stringify(productLocalStorage));
+    
+                        let todos = JSON.parse(localStorage.getItem("todo"));
+                        DisplayTodos(todos);
+                        OpenTodo(todos);
+
+                        window.scroll({
+                            top: 1,
+                            left: 1,
+                            behavior: 'smooth'
+                          });
+                    }
+                }
+    })
+}
