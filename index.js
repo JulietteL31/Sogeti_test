@@ -196,6 +196,10 @@ function AddNew(e) {
     DisplayTodos(todos);
     /*Fonction OpenTodo qui permet d'afficher les informations d'une todo*/
     OpenTodo(todos);
+    /*Fonctions de modification du state*/
+    ChangeStateDone();
+    ChangeStateProgress();
+    ChangeStateTodo();
 };
 
 /*event listener au click sur le bouton "add"*/
@@ -212,6 +216,10 @@ en paramètre*/
 DisplayTodos(todos);
 /*Fonction OpenTodo qui permet d'afficher les informations d'une todo*/
 OpenTodo(todos);
+/*Fonctions de modification du state*/
+ChangeStateDone();
+ChangeStateProgress();
+ChangeStateTodo();
 
 
 
