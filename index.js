@@ -194,6 +194,8 @@ function AddNew(e) {
     /*On appelle la fonction DisplayTodos qui permet d'afficher toutes les todos avec la variable todos
     en paramètre*/
     DisplayTodos(todos);
+    /*Fonction OpenTodo qui permet d'afficher les informations d'une todo*/
+    OpenTodo(todos);
 };
 
 /*event listener au click sur le bouton "add"*/
@@ -208,6 +210,8 @@ let todos = JSON.parse(localStorage.getItem("todo"));
 /*On appelle la fonction DisplayTodos qui permet d'afficher toutes les todos avec la variable todos
 en paramètre*/
 DisplayTodos(todos);
+/*Fonction OpenTodo qui permet d'afficher les informations d'une todo*/
+OpenTodo(todos);
 
 
 
@@ -291,4 +295,334 @@ function DisplayTodos(todos) {
           .insertAdjacentHTML("afterbegin", nouvelleTodo);
         }
     }
+}
+
+
+// OUVERTURE DES TODOS //
+
+function OpenTodo(todos) {
+    /*Boucle sur le tableau d'objet du local storage : "pour chaque todo..."*/
+    for(let todo of todos) {
+        /*Récupération de la todo en fonction de son id*/
+        let id = document.getElementById(`${todo.id}`);
+        /*Récupération de la div conteneur dans le DOM*/
+        let conteneur = document.getElementById("opentodoview");
+        /*event listener sur la todo*/
+        id.addEventListener('click', () => {
+            /*Vérification que le conteneur est vide*/
+            let yet = conteneur.firstElementChild;
+            /*S'il est vide*/
+            if(yet === null) {
+                /*Création de la constante avec les informations à afficher*/
+                const open = 
+            `<div class="opentodo" id="opentodo">
+                <div class="opentodo-close" id="iconeclose"><i class="fa-solid fa-plus fas i-close"></i></div>
+                <div class="opentodo-content">
+                    <h3>${todo.title}</h3>
+                    <p>${todo.description}</p>
+                    <div class="legende">
+                        <div class="circle legende-${todo.timelimit}"></div>
+                        <p>${todo.timelimit}</p>
+                    </div>
+                    <div class="modify" id="modify">
+                        <div class="modify-content">
+                            <i class="fa-solid fa-pen fas icone-modify" id="pen"></i>
+                            <p>Modify</p>
+                        </div>
+                    </div>
+                    <div class="form-modify" id="form-modify">
+                        <form class="formulaire">
+                            <div class="question-form question-modify">
+                                <label for="title-input-modify">Title :</label>
+                                <input
+                                    type="text"
+                                    id="title-input-modify"
+                                    name="title"
+                                    class="input"
+                                    value="${todo.title}"
+                                    required
+                                />
+                            </div>
+                        <div class="question-form question-modify">
+                            <label for="description-modify">Description :</label>
+                            <textarea
+                                id="description-modify"
+                                name="description"
+                                class="input"
+                                value=""
+                            ></textarea>
+                        </div>
+                        <div class="question-form question-modify">
+                            <label for="state-modify">Choose a state:</label>
+                            <select name="states" id="state-modify" class="input pointer">
+                                <option class="pointer" value="">
+                                --Please choose an option--
+                                </option>
+                                <option class="pointer" value="todo">Todo</option>
+                                <option class="pointer" value="in progress">In progress</option>
+                                <option class="pointer" value="done">Done</option>
+                            </select>
+                        </div>
+                        <div class="question-form question-modify">
+                            <legend>Choose a time limit:</legend>
+                            <div class="form-radio">
+                                <input
+                                    type="radio"
+                                    id="urgent-modify"
+                                    name="time-limit"
+                                    value="urgent"
+                                    class="pointer radio"
+                                    checked
+                                />
+                                <label for="urgent-modify">Urgent</label>
+                            </div>
+                            <div class="form-radio">
+                                <input
+                                    type="radio"
+                                    id="secondary-modify"
+                                    name="time-limit"
+                                    value="secondary"
+                                    class="pointer radio"
+                                />
+                                <label for="secondary-modify">Secondary</label>
+                            </div>
+                        </div>
+                        <div class="buttons-form">
+                            <div class="form-button">
+                                <div type="modify" class="button-modify" id="button-modify-todo">
+                                    Modify
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>`
+            /*Insertion de la constante dans le conteneur*/
+            conteneur.insertAdjacentHTML("afterbegin", open);
+
+            /*Scroll en haut de page*/
+            window.scroll({
+                top: 1,
+                left: 1,
+                behavior: 'smooth'
+              });
+            
+            /*Appel de la fonction CloseTodo qui permet de fermer la fenêtre*/
+            CloseTodo();
+            /*Appel de la fonction OpenFormModif qui permet d'ouvrir le formulaire de modification*/
+            OpenFormModif();
+            /*Event listener sur le bouton "modify" du formulaire*/
+            document.getElementById("button-modify-todo").addEventListener('click', () => {
+                /*On récupère les éléments du formulaire dans le DOM*/
+                let title = document.getElementById("title-input-modify");
+                let description = document.getElementById("description-modify");
+                let state = document.getElementById("state-modify");
+                let urgent = document.getElementById("urgent-modify");
+                let secondary = document.getElementById("secondary-modify");
+
+                /*On récupère les valeurs des input*/
+                let titlevalue = title.value;
+                let desvalue = description.value;
+                let statevalue = state.value;
+
+                /*On enlève les espaces du titre pour obtenir un id viable*/
+                let id = titlevalue.split(' ').join('');
+
+                let productLocalStorage = JSON.parse(localStorage.getItem("todo"));
+    
+                        /*On récupère les éléments de la todo à modifier dans le local storage*/
+                        let todoModify = productLocalStorage.find(el => el.id === id);
+                        
+
+                        if(statevalue === "") {
+                            alert("Veuillez saisir un statut");
+                            //CAS URGENT
+                        } else if(urgent.checked) {
+                            /*On modifie les informations existantes avec les nouvelles infos*/
+                            todoModify.id = id;
+                            todoModify.title = titlevalue;
+                            todoModify.description = desvalue;
+                            todoModify.state = statevalue;
+                            todoModify.timelimit = "urgent"
+    
+                            /*On ajoute au local storage*/
+                            localStorage.setItem("todo", JSON.stringify(productLocalStorage));
+                            /*On ferme le conteneur*/
+                            document.getElementById("opentodo").remove();
+
+                            //CAS SECONDARY
+                        } else if(secondary.checked) {
+                            todoModify.id = id;
+                            todoModify.title = titlevalue;
+                            todoModify.description = desvalue;
+                            todoModify.state = statevalue;
+                            todoModify.timelimit = "secondary"
+    
+                            localStorage.setItem("todo", JSON.stringify(productLocalStorage));
+                            document.getElementById("opentodo").remove();
+
+                        }
+                        
+                        let todos = JSON.parse(localStorage.getItem("todo"));
+                        DisplayTodos(todos);
+                        OpenTodo(todos);
+                    });
+            /*Si le conteneur n'est pas vide : si une todo est ouverte et que l'on clique sur une 
+            autre todo sans avoir fermé la précédente*/
+            /*Suppression de la todo puis même logique que pour le premier cas*/
+            } else {
+                yet.remove();
+                const open = 
+            `<div class="opentodo" id="opentodo">
+                <div class="opentodo-close" id="iconeclose"><i class="fa-solid fa-plus fas i-close"></i></div>
+                <div class="opentodo-content">
+                    <h3>${todo.title}</h3>
+                    <p>${todo.description}</p>
+                    <div class="legende">
+                        <div class="circle legende-${todo.timelimit}"></div>
+                        <p>${todo.timelimit}</p>
+                    </div>
+                    <div class="modify" id="modify">
+                        <div class="modify-content">
+                            <i class="fa-solid fa-pen fas icone-modify" id="pen"></i>
+                            <p>Modify</p>
+                        </div>
+                    </div>
+                    <div class="form-modify" id="form-modify">
+                        <form class="formulaire">
+                            <div class="question-form question-modify">
+                                <label for="title-input-modify">Title :</label>
+                                <input
+                                    type="text"
+                                    id="title-input-modify"
+                                    name="title"
+                                    class="input"
+                                    value="${todo.title}"
+                                    required
+                                />
+                            </div>
+                        <div class="question-form question-modify">
+                            <label for="description-modify">Description :</label>
+                            <textarea
+                                id="description-modify"
+                                name="description"
+                                value=""
+                                class="input"
+                            ></textarea>
+                        </div>
+                        <div class="question-form question-modify">
+                            <label for="state-modify">Choose a state:</label>
+                            <select name="states" id="state-modify" class="input pointer">
+                                <option class="pointer" value="">
+                                --Please choose an option--
+                                </option>
+                                <option class="pointer" value="todo">Todo</option>
+                                <option class="pointer" value="in progress">In progress</option>
+                                <option class="pointer" value="done">Done</option>
+                            </select>
+                        </div>
+                        <div class="question-form question-modify">
+                            <legend>Choose a time limit:</legend>
+                            <div class="form-radio">
+                                <input
+                                    type="radio"
+                                    id="urgent"
+                                    name="time-limit"
+                                    value="urgent"
+                                    class="pointer radio"
+                                    checked
+                                />
+                                <label for="urgent">Urgent</label>
+                            </div>
+                            <div class="form-radio">
+                                <input
+                                    type="radio"
+                                    id="secondary"
+                                    name="time-limit"
+                                    value="secondary"
+                                    class="pointer radio"
+                                />
+                                <label for="secondary">Secondary</label>
+                            </div>
+                        </div>
+                        <div class="buttons-form">
+                            <div class="form-button">
+                                <div type="modify" class="button-modify" id="button-modify-todo">
+                                    Modify
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>`
+            conteneur.insertAdjacentHTML("afterbegin", open);
+            window.scroll({
+                top: 1,
+                left: 1,
+                behavior: 'smooth'
+              });
+            CloseTodo();
+            OpenFormModif();
+            document.getElementById("button-modify-todo").addEventListener('click', () => {
+                //On récupère les éléments du formulaire dans le DOM
+                let title = document.getElementById("title-input-modify");
+                let description = document.getElementById("description-modify");
+                let state = document.getElementById("state-modify");
+                let urgent = document.getElementById("urgent-modify");
+                let secondary = document.getElementById("secondary-modify");
+
+                //On récupère les valeurs des input
+                let titlevalue = title.value;
+                let desvalue = description.value;
+                let statevalue = state.value;
+
+                //On enlève les espaces du titre pour obtenir un id viable
+                let id = titlevalue.split(' ').join('');
+
+                let productLocalStorage = JSON.parse(localStorage.getItem("todo"));
+    
+                        let todoModify = productLocalStorage.find(el => el.id === id);
+                        console.log(todoModify);
+
+                        if(statevalue === "") {
+                            alert("Veuillez saisir un statut");
+                        } else if(urgent.checked) {
+                            todoModify.id = id;
+                            todoModify.title = titlevalue;
+                            todoModify.description = desvalue;
+                            todoModify.state = statevalue;
+                            todoModify.timelimit = "urgent"
+    
+                            localStorage.setItem("todo", JSON.stringify(productLocalStorage));
+                            document.getElementById("opentodo").remove();
+
+                        } else if(secondary.checked) {
+                            todoModify.id = id;
+                            todoModify.title = titlevalue;
+                            todoModify.description = desvalue;
+                            todoModify.state = statevalue;
+                            todoModify.timelimit = "secondary"
+    
+                            localStorage.setItem("todo", JSON.stringify(productLocalStorage));
+                            document.getElementById("opentodo").remove();
+
+                        }
+                        
+                        let todos = JSON.parse(localStorage.getItem("todo"));
+                        DisplayTodos(todos);
+                        OpenTodo(todos);
+                    });
+            }
+        })
+    }
+}
+
+
+// FERMETURE DES TODOS //
+
+function CloseTodo() {
+    let iconeclose = document.getElementById("iconeclose");
+    iconeclose.addEventListener("click", () => {
+    iconeclose.closest("#opentodo").remove();
+})
 }
