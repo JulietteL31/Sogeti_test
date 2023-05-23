@@ -37,3 +37,35 @@ if(productLocalStorage === null) {
     productLocalStorage.push(todotest3);
     localStorage.setItem("todo", JSON.stringify(productLocalStorage));
 }
+
+
+                    // /* GESTION DES FONCTIONNALITES DYNAMIQUES */ //
+
+
+// OUVERTURE ET FERMETURE DU FORMULAIRE ADD NEW //
+
+/*Récupération des éléments nécessaires dans le DOM: bouton pour ouvrir le formulaire, 
+icone plus et formulaire*/
+let add = document.getElementById('add-new');
+let form = document.getElementById('form-add-new');
+let plus = document.getElementById('plus');
+
+/*Ouverture du formulaire: le formulaire passe en display flex, on ajoute la classe "plus" 
+sur l'icone pour déclencher une animation et on supprime la classe "minus" (pour le cas où 
+l'on a déjà ouvert et fermé le formulaire)*/
+/*Fermeture du formulaire : le formulaire passe en display none, on supprime la classe "plus" et
+on ajoute la classe "minus" pour déclencher l'animation de fermeture*/
+function OpenForm() {
+ if(getComputedStyle(form).display != "flex") {
+    form.style.display = 'flex';
+    plus.classList.remove('minus');
+    plus.classList.add('plus');
+ } else {
+    form.style.display = 'none';
+    plus.classList.remove('plus');
+    plus.classList.add('minus');
+ }
+}
+
+/*On met un event listener sur le bouton*/
+add.addEventListener('click', OpenForm);
