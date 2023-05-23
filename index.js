@@ -781,3 +781,21 @@ function ChangeStateTodo() {
                 }
     })
 }
+
+
+// OUVERTURE/FERMETURE DE L'INFOBULLE //
+
+/*récupération des éléments dans le DOM: icone et div info*/
+let iconeInfobulle = document.getElementById("icone-infobulle");
+let infobulle = document.getElementById("infobulle");
+
+function Infobulle() {
+    if(getComputedStyle(infobulle).display != "flex") {
+        infobulle.style.display = "flex";
+    } else {
+        infobulle.style.display = "none";
+    }
+}
+
+/*event listener au click sur l'icone info*/
+iconeInfobulle.addEventListener('click', Infobulle);
