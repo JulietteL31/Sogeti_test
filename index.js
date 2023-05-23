@@ -200,6 +200,8 @@ function AddNew(e) {
     ChangeStateDone();
     ChangeStateProgress();
     ChangeStateTodo();
+    /*Fonction delete*/
+    Delete();
 };
 
 /*event listener au click sur le bouton "add"*/
@@ -220,6 +222,8 @@ OpenTodo(todos);
 ChangeStateDone();
 ChangeStateProgress();
 ChangeStateTodo();
+/*Fonction delete*/
+Delete();
 
 
 
@@ -799,3 +803,42 @@ function Infobulle() {
 
 /*event listener au click sur l'icone info*/
 iconeInfobulle.addEventListener('click', Infobulle);
+
+
+
+// SUPPRESSION DES TODOS //
+
+function Delete() {
+    /*event listener sur le bouton delete*/
+    /*même logique de boucle sur les checkbox que pour les fonctions de modif du state*/
+    document.getElementById("deletetodo").addEventListener('click', () => {
+        let allcheckbox = document.querySelectorAll(".checkbox-change-state");
+        for(let i=0; i < allcheckbox.length; i++) {
+                    if(allcheckbox[i].checked) {
+                        let check = allcheckbox[i];
+                        let parent = check.closest('.item-todo-state');
+                        console.log(parent);
+                        let todoId = parent.lastElementChild.id;
+    
+                        let productLocalStorage = JSON.parse(localStorage.getItem("todo"));
+    
+                        let todoChange = productLocalStorage.find(el => el.id === todoId);
+                        console.log(todoChange);
+
+                        /*création d'un nouveau tableau en "filtrant" les les todos sélectionnées*/
+                        let produitLocalStorage = productLocalStorage.filter(
+                            p => p.id !== todoId
+                        );
+
+                        /*on push le nouveau tableau*/
+                        localStorage.setItem("todo", JSON.stringify(produitLocalStorage));
+                    } else {
+                        console.log('pas de todos à supprimer');
+                    }
+
+                    let todos = JSON.parse(localStorage.getItem("todo"));
+                        DisplayTodos(todos);
+                        OpenTodo(todos);
+                }
+    })
+}
