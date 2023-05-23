@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="./favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <script src="https://kit.fontawesome.com/cb8e7ae64b.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Delicious+Handrawn&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css" />
+    <meta name="description" content="Kanban board" />
+    <link rel="apple-touch-icon" href="./kanban.png" />
+    <title>My Kanban Board</title>
+  </head>
+  <body>
+    <header class="header">
+      <h1 class="header_title">My Kanban Board</h1>
+    </header>
+    <section>
+      <div class="mykanban-container">
+        <div class="add-new" id="add-new">
+          <div class="add-new-content">
+            <i class="fa-solid fa-plus fas" id="plus"></i>
+            <p>Add new item</p>
+          </div>
+        </div>
+        <div class="form-add-new" id="form-add-new">
+          <form class="form">
+            <div class="question-form">
+              <label for="title">Title :</label>
+              <input
+                type="text"
+                id="title"
+                name="title"
+                class="input"
+                required
+              />
+            </div>
+            <div class="question-form">
+              <label for="description">Description :</label>
+              <textarea
+                id="description"
+                name="description"
+                class="input"
+              ></textarea>
+            </div>
+            <div class="question-form">
+              <label for="state-select">Choose a state:</label>
+              <select name="states" id="state-select" class="input pointer">
+                <option class="pointer" value="">
+                  --Please choose an option--
+                </option>
+                <option class="pointer" value="todo">Todo</option>
+                <option class="pointer" value="in progress">In progress</option>
+                <option class="pointer" value="done">Done</option>
+              </select>
+            </div>
+            <div class="question-form">
+              <legend>Choose a time limit:</legend>
+              <div class="form-radio">
+                <input
+                  type="radio"
+                  id="urgent"
+                  name="time-limit"
+                  value="urgent"
+                  class="pointer radio"
+                  checked
+                />
+                <label for="urgent">Urgent</label>
+              </div>
+              <div class="form-radio">
+                <input
+                  type="radio"
+                  id="secondary"
+                  name="time-limit"
+                  value="secondary"
+                  class="pointer radio"
+                />
+                <label for="secondary">Secondary</label>
+              </div>
+            </div>
+            <div class="buttons-form">
+                <div class="form-button">
+                    <button type="submit" value="Add" class="submit" id="add">
+                      <i class="fa-solid fa-plus fas icone-add"></i>Add
+                    </button>
+                </div>
+                <!-- <div class="form-button">
+                    <button type="modify" value="Modify" class="button-modify" id="button-modify-todo">
+                        <i class="fa-solid fa-pen fas icone-modify"></i>Modify
+                    </button>
+                </div> -->
+                <div class="form-button">
+                    <button type="reset" value="Reset" class="button-reset">
+                        <i class="fa-solid fa-plus fas icone-reset"></i>Reset
+                    </button>
+                </div>
+            </div>
+          </form>
+        </div>
+        <div id="opentodoview"></div>
+
+        <!-- Légende -->
+
+        <!-- <div class="legende-container">
+            <div class="legende">
+              <div class="legende-urgent circle"></div>
+              <p>Urgent</p>
+            </div>
+            <div class="legende">
+              <div class="legende-secondary circle"></div>
+              <p>Secondary</p>
+            </div>
+          </div> -->
+
+        <div class="kanban-board desktop">
+          <div class="kanban-board-line title-desktop">
+            <div class="kanban-board-title">
+              <h2><i class="fa-solid fa-list fas icone-title"></i>Todo</h2>
+            </div>
+            <div class="kanban-board-title">
+              <h2>
+                <i class="fa-solid fa-spinner fas icone-title"></i>In progress
+              </h2>
+            </div>
+            <div class="kanban-board-title">
+              <h2><i class="fa-solid fa-check fas icone-title"></i>Done</h2>
+            </div>
+          </div>
+
+          <div class="kanban-board-line">
+            <div class="kanban-board-todo">
+              <div class="kanban-board-title title-phone">
+                <h2><i class="fa-solid fa-list fas icone-title"></i>Todo</h2>
+              </div>
+              <div id="todo"></div>
+            </div>
+            <div class="kanban-board-todo">
+              <div class="kanban-board-title title-phone">
+                <h2>
+                  <i class="fa-solid fa-spinner fas icone-title"></i>In progress
+                </h2>
+              </div>
+              <div id="inprogress"></div>
+            </div>
+            <div class="kanban-board-todo">
+              <div class="kanban-board-title title-phone">
+                <h2><i class="fa-solid fa-check fas icone-title"></i>Done</h2>
+              </div>
+              <div id="done"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="container-infobulle" id="infobulle"><p class="infobulle">Check the items you want to update. Click on the action button of your choice. All checked items will be updated.</p></div>
+        
+        <div class="state-and-delete">
+            <div class="update-state">
+                <div class="title-et-info">
+                    <p>Update state</p>
+                    <div class="container-icone-infobulle" id="icone-infobulle"><i class="fa-solid fa-question fas icone-infobulle"></i></div>
+                </div>
+                <div class="boutons-change-state">
+                  <button id="button-change-todo" class="button-change-state">
+                    Todo
+                  </button>
+                  <button id="button-change-inprogress" class="button-change-state">
+                    In progress
+                  </button>
+                  <button id="button-change-done" class="button-change-state">
+                    Done
+                  </button>
+                </div>
+            </div>
+            
+              <div class="clean">
+                  <button id="deletetodo" class="button-change-state button-delete">Delete</button>
+              </div>
+        </div>
+
+    </div>
+    </section>
+    <div class="opentodo-close"></div>
+    <script src="index.js"></script>
+  </body>
+</html>
