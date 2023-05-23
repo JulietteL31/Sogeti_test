@@ -1,0 +1,914 @@
+/*GENERAL*/
+body {
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    max-width: 1500px;
+    margin: auto 0;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 1px;
+    margin-right: 10px;
+}
+
+::-webkit-scrollbar-track {
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: lightgrey;
+    border-radius: 10px;
+}
+
+
+/* STYLE HEADER */
+.header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.header_title {
+    text-align: center;
+    font-size: 62px;
+    font-family: 'Delicious Handrawn', cursive;
+}
+
+/* STYLE FORMULAIRE AJOUT TODO */
+
+    /*Bouton*/
+.add-new {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    width: 20%;
+    border: lightgrey 2px solid;
+    background-color: lightgrey;
+    margin-bottom: 30px;
+}
+
+.add-new:hover {
+    cursor: pointer;
+}
+
+.add-new-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 90%;
+}
+
+.minus {
+    animation: rotateReverse 300ms forwards;
+}
+
+.plus {
+    animation: rotate 300ms forwards;
+}
+
+    /*Formulaire*/
+.form-add-new {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.form {
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    background-color: lightgrey;
+    border: lightgrey 2px solid;
+    border-radius: 20px;
+    padding: 10px;
+    position: relative;
+}
+
+.question-form {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    margin: 5px 0 5px 0;
+}
+
+.input {
+    margin-left: 5px;
+    border-radius: 10px;
+    color: black;
+}
+
+.form-radio {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.radio {
+    background-color: black;
+    color: black;
+}
+
+.form-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-self: left;
+    width: auto;
+    margin: 17px 0 0 0;
+    cursor: pointer;
+}
+
+.icone-add, .icone-modify {
+    margin-right: 7px;
+}
+
+.submit {
+    padding: 5px;
+    background-color: white;
+    border: 2px solid black;
+    color: black;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.submit:hover, .button-modify:hover {
+    background-color: black;
+    color: white;
+}
+
+#form-add-new {
+    display: none;
+}
+
+.pointer:hover {
+    cursor: pointer;
+}
+
+.button-reset {
+    cursor: pointer;
+    /* position: absolute;
+    bottom: 10px;
+    right: 10px; */
+    padding: 5px;
+    border: 2px solid rosybrown;
+    color: rosybrown;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.button-reset:hover {
+    background-color: rosybrown;
+    color: white;
+}
+
+.icone-reset {
+    transform: rotate(45deg);
+    margin-right: 5px;
+}
+
+.button-modify {
+    cursor: pointer;
+    padding: 5px;
+    border: 2px solid black;
+    color: black;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.buttons-form {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}
+
+
+/* STYLE TABLEAU TODO */
+
+.kanban-board {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 90%;
+    border: black solid 1px;
+  }
+
+.phone {
+    display: none;
+}
+
+.mykanban-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.kanban-board-title, .kanban-board-todo {
+    border: black solid 1px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.title-phone {
+    display: none;
+}
+
+.kanban-board-todo {
+    height: auto;
+}
+
+.icone-title {
+    margin-right: 10px;
+}
+
+.kanban-board-line {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+#todo, #inprogress, #done {
+    width: 100%;
+}
+
+/* STYLE ITEM TODO */
+.todo {
+    border: solid black 1px;
+    box-shadow: grey 2px 2px 10px;
+    width: 150px;
+    height: 90px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0 10px 0;
+    transform: rotate(2deg);
+}
+
+.todo:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    box-shadow: black 2px 2px 15px;
+    transform: rotate(2deg);
+}
+
+.todo-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+.todo-title {
+    width: 95%;
+    margin: 0px;
+}
+
+.todo-title, .todo-description {
+    font-family: 'Delicious Handrawn', cursive;
+    text-align: center;
+}
+
+.todo-description {
+    width: 95%;
+    margin: 0px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.done > .todo-content > .todo-title, .done > .todo-content > .todo-description {
+    text-decoration: line-through;
+}
+
+.urgent {
+    background-color: lightsalmon;
+    transform: rotate(-2deg);
+}
+
+.secondary {
+    background-color: lightblue;
+}
+
+/*STYLE DIV PARAMETRAGE TODO : CHECKBOX CHANGE STATE*/
+.item-todo-state {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.setTodo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:center;
+    width: 10%;
+}
+
+.change-state {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 110%;
+}
+
+.checkbox-change-state {
+    width: 17px;
+    height: 17px;
+}
+
+.checkbox-change-state:hover {
+    cursor: pointer;
+}
+
+/* STYLE CONTENEUR/BOUTONS UPDATE STATE */
+
+.state-and-delete {
+    width: 60%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.update-state {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    align-self: center;
+    background-color: grey;
+    margin: 20px 0 10px 0;
+    padding: 10px 0 10px 0;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.title-et-info > p {
+    /* width: 30%; */
+    margin: 0;
+    color: white;
+}
+
+.title-et-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+}
+
+.boutons-change-state {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.button-change-state {
+    border: 1px solid black;
+    background-color: white;
+    margin: 0 10px 0 10px;
+    border-radius: 13px;
+    padding: 5px;
+    width: 80px;
+}
+
+.button-change-state:hover {
+    cursor: pointer;
+}
+
+.clean {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 20%;
+    align-self: center;
+    background-color: rosybrown;
+    margin: 20px 0 10px 0;
+    padding: 10px 0 10px 0;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.container-icone-infobulle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 17px;
+    margin-left: 30px;
+    background-color: lightgray;
+    border-radius: 100%;
+    padding: 3px 0 3px 0;
+}
+
+.container-icone-infobulle:hover {
+    cursor: pointer;
+}
+
+.icone-infobulle {
+    color: grey;
+    font-size: 10px;
+}
+
+#infobulle {
+    display: flex;
+    align-self: center;
+    border: grey solid 2px;
+    padding: 2px;
+    border-style: dotted;
+    margin-top: 20px;
+    margin-bottom: -10px;
+    display: none;
+}
+
+.infobulle {
+    text-align: center;
+    margin: 0;
+    font-size: 13px;
+}
+
+
+
+
+/*OPEN TODO*/
+.opentodo {
+    display: block;
+    width: 50%;
+    /* height: 50%; */
+    position: absolute;
+    top: 100px;
+    left: 25%;
+    background-color: white;
+    box-shadow: grey 2px 2px 10px;
+    z-index: 1;
+}
+
+.opentodo-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.opentodo-content > h3 {
+    font-family: 'Delicious Handrawn', cursive;
+    font-size: 35px;
+    text-align: center;
+}
+
+.opentodo-content > p {
+    text-align: center;
+    margin: 0 5px 15px 5px;
+    font-family: 'Delicious Handrawn', cursive;
+    font-size: 22px;
+}
+
+
+/*bouton modify*/
+
+.modify {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    width: 80px;
+    border: lightgrey 2px solid;
+    background-color: white;
+    margin: 10px 0 10px 0;
+    padding: 5px;
+}
+
+.modify:hover {
+    cursor: pointer;
+}
+
+.modify-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 90%;
+}
+
+.modify-content > p {
+    margin: 0;
+}
+
+.gauche {
+    animation: gauche 300ms forwards;
+}
+
+.droite {
+    animation: droite 300ms forwards;
+}
+
+/*Formulaire modify*/
+
+.form-modify {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+#form-modify {
+    display: none;
+}
+
+.formulaire {
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    background-color: lightgrey;
+    border: lightgrey 2px solid;
+    border-radius: 20px;
+    padding: 10px;
+    position: relative;
+}
+
+/*icone fermeture todo*/
+
+.opentodo-close {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    cursor: pointer;
+}
+
+.i-close {
+    font-size: 20px;
+    transform: rotate(45deg);
+    padding: 2px 3px 2px 3px;
+    border: black solid 2px;
+    border-radius: 100%;
+}
+
+.i-close:hover {
+    color: white;
+    background-color: black;
+}
+
+/*LEGENDE*/
+.legende-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    margin-top: 20px;
+}
+
+.legende {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+}
+
+.circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    margin-right: 7px;
+}
+
+.legende-urgent {
+    background-color: lightsalmon;
+}
+
+.legende-secondary {
+    background-color: lightblue;
+}
+
+/*KEYFRAMES*/
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(135deg);
+    }
+}
+
+@keyframes rotateReverse {
+    0% {
+        transform: rotate(135deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes gauche {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(-90deg);
+    }
+}
+
+@keyframes droite {
+    0% {
+        transform: rotate(-90deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+
+/*MEDIA QUERIES*/
+@media screen and (max-width:1325px) {
+    .form-modify {
+        width: 70%;
+    }
+}
+
+@media screen and (max-width:1140px) {
+    .state-and-delete {
+        width: 70%;
+    }
+}
+
+@media screen and (max-width:970px) {
+    .form-modify {
+        width: 100%;
+    }
+    .state-and-delete {
+        width: 90%;
+    }
+}
+
+@media screen and (max-width:860px) {
+    /* .update-state {
+        width: 80%;
+    } */
+    #infobulle {
+        margin-bottom: 0;
+        align-self: center;
+        width: 80%;
+    }
+}
+
+@media screen and (max-width:760px) {
+    .question-modify {
+        flex-direction: column;
+        justify-content: center;
+    }
+    .formulaire {
+        width: 70%;
+    }
+    .state-and-delete {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width:750px) {
+    .add-new {
+        width: 30%;
+    }
+    .opentodo-content > h3 {
+        font-size: 25px;
+    }
+    .opentodo-content > p {
+        font-size: 19px;
+    }
+}
+
+@media screen and (max-width:700px) {
+    .form-add-new {
+        width: 90%;
+    }
+    .todo {
+        width: 100px;
+        height: 100px;
+    }
+    .item-todo-state {
+        justify-content: space-around;
+    }  
+    .header_title {
+        font-size: 45px;
+    }
+    .kanban-board-title {
+        font-size: 14px;
+    } 
+    .legende-container {
+        width: 50%;
+    }
+    .circle {
+        width: 13px;
+        height: 13px;
+    }
+    /* .todo-title {
+        height: 40%;
+        width: 95%;
+        margin: 0px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    } */
+}
+
+@media screen and (max-width:686px) {
+    .state-and-delete {
+        flex-direction: column;
+    }
+    .update-state {
+        width: 90%;
+        margin-bottom: 0;
+        border-bottom-left-radius: initial;
+        border-top-right-radius: 10px;
+    }
+    .clean {
+        width: 90%;
+        margin-top: 0;
+        border-top-right-radius: initial;
+        border-bottom-left-radius: 10px;
+    }
+}
+
+@media screen and (max-width:600px) {
+    .title-desktop {
+        display: none;
+    }
+    .title-phone {
+        display: block;
+    }
+    .title-phone > h2 {
+        text-align: center;
+    }
+    .kanban-board {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 90%;
+        border: none;
+    }
+    .kanban-board-line {
+        flex-direction: column;
+    }
+    .kanban-board-todo {
+        margin-bottom: 20px;
+    }
+    .item-todo-state {
+        justify-content: center;
+        width: 30%;
+    }
+    #todo, #inprogress, #done {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+    }
+    .submit {
+        background-color: black;
+        color: white;
+    }
+    .button-reset {
+        background-color: rosybrown;
+        color: white;
+    }
+    .update-state {
+        flex-direction: column;
+        margin-bottom: 0;
+    }
+    .title-et-info > p {
+        text-align: center;
+    }
+    .container-icone-infobulle {
+        margin-left: 5px;
+    }
+    .title-et-info {
+        margin-bottom: 10px;
+        width: auto;
+    }
+    .clean {
+        width: 90%;
+        margin-top: 0;
+    }
+    .change-state {
+        margin-right: 30px;
+    }
+    .opentodo {
+        width: 70%;
+        left: 15%;
+    }
+}
+
+@media screen and (max-width:500px) {
+    .add-new {
+        width: 50%;
+    }
+    .item-todo-state {
+        width: 45%;
+    }
+}
+
+@media screen and (max-width:400px) {
+    .question-form {
+        flex-direction: column;
+    }
+    .form {
+        width: 70%;
+        align-items: center;
+    }
+    .buttons-form {
+        flex-direction: column;
+    }
+    .form-button {
+        width: 70%;
+    }
+    .button-reset {
+        position: initial;
+        width: 100%;
+    }
+    .submit {
+        width: 100%;
+    }
+    .boutons-change-state {
+        flex-direction: column;
+    }
+    .button-change-state {
+        margin-bottom: 5px;
+    }
+    .update-state, .clean {
+        width: 50%;
+    }
+    .item-todo-state {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width:370px) {
+    .opentodo {
+        width: 90%;
+        left: 5%;
+    }
+}
+
+
+@media screen and (max-width:320px) {
+    .update-state, .clean {
+        width: 70%;
+    }
+}
+
+@media screen and (max-width:280px) {
+    .header_title {
+        font-size: 40px;
+    }
+    .add-new {
+        width: 90%;
+    }
+    .form {
+        width: 90%;
+    }
+    .formulaire {
+        width: 85%;
+    }
+}
+
+@media screen and (max-width:220px) {
+    .update-state, .clean {
+        width: 100%;
+    }
+}
