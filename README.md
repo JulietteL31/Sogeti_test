@@ -51,3 +51,25 @@ You're working in the WebFactory which provides the following technical recommen
 # Bonus
 You can add any new functionality in this wonderful project if you want to, in order to satisfy your PO 😉
 
+
+# New features
+
+## 1 : Modify a TODO
+
+### Description :
+The user can modify a todo via the modification form, located in the dedicated view of the todo
+### Specification :
+The title of the todo can't be modified
+
+## 2 : Delete one or more TODOS
+
+### Description :
+The user can delete one or more todos by checking them and clicking on the delete button at the bottom of the page
+### Specification :
+Warning : there is no confirmation window before deletion
+
+## 3 : Responsive design
+
+### Description:
+Enjoy your Kanban board on all screens !
+
