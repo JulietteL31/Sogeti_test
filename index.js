@@ -626,3 +626,28 @@ function CloseTodo() {
     iconeclose.closest("#opentodo").remove();
 })
 }
+
+
+// OUVERTURE DU FORMULAIRE DE MODIFICATION //
+
+/*Même logique que pour l'ouverture du formulaire d'ajout*/
+/*Récup des infos : bouton, icone, formulaire*/
+/*event listener sur le bouton*/
+/*Si le formulaire est fermé : display flex, ajout/suppression d'une classe pour animation icone*/
+/*Si le formulaire est ouvert : display none, ajout/suppression d'une classe pour animation icone*/
+function OpenFormModif() {
+    let form = document.getElementById("form-modify");
+    let icone = document.getElementById("pen");
+    let bouton = document.getElementById("modify");
+    bouton.addEventListener('click', () => {
+        if(getComputedStyle(form).display != "flex") {
+            form.style.display = "flex";
+            icone.classList.remove('droite');
+            icone.classList.add('gauche');
+        } else {
+            form.style.display = "none";
+            icone.classList.remove('gauche');
+            icone.classList.add('droite');
+        }
+    })
+}
