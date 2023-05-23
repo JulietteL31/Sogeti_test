@@ -191,7 +191,104 @@ function AddNew(e) {
 
     /*Récupération des données du stockage local*/
     let todos = JSON.parse(localStorage.getItem("todo"))
+    /*On appelle la fonction DisplayTodos qui permet d'afficher toutes les todos avec la variable todos
+    en paramètre*/
+    DisplayTodos(todos);
 };
 
 /*event listener au click sur le bouton "add"*/
 addButton.addEventListener('click', AddNew);
+
+
+
+// APPEL DES FONCTIONS COURANTES //
+
+/*On récupère le local storage dans la variable todos*/
+let todos = JSON.parse(localStorage.getItem("todo"));
+/*On appelle la fonction DisplayTodos qui permet d'afficher toutes les todos avec la variable todos
+en paramètre*/
+DisplayTodos(todos);
+
+
+
+// AFFICHAGE DES NOUVELLES TODOS //
+
+function DisplayTodos(todos) {
+    /*Récupération dans le DOM des div où vont s'afficher les todos et on les initialise vide
+    pour ne pas que les todos soient affichées en plusieurs fois*/
+    let done = document.getElementById("done");
+    done.innerHTML = "";
+    let todo = document.getElementById("todo");
+    todo.innerHTML = "";
+    let inprogress = document.getElementById("inprogress");
+    inprogress.innerHTML = "";
+    /*Boucle sur le tableau "todos" du local storage*/
+    for (let todo of todos) {
+        /*Si le state de la todo est "todo" on crée une constante avec les infos et on 
+        l'insère dans la div todo*/
+        if(todo.state === 'todo') {
+            const nouvelleTodo = 
+                `<div class="item-todo-state">
+                    <div class="setTodo">
+                        <div class="change-state">
+                            <label for="changestate-${todo.id}"></label>
+                            <input type="checkbox" value="changestate" name="changestate" id="changestate-${todo.id}" class="checkbox-change-state">
+                        </div>
+                    </div>
+                    <div class="todo ${todo.timelimit}" id="${todo.id}">
+                        <div class="todo-content">
+                            <h3 class="todo-title">${todo.title}</h3>
+                            <p class="todo-description">${todo.description}</p>
+                        </div>
+                    </div>
+                </div>`
+            document
+          .getElementById("todo")
+          .insertAdjacentHTML("afterbegin", nouvelleTodo);
+
+          /*Si le state de la todo est "in progress" on crée une constante avec les infos et on 
+        l'insère dans la div in progress*/
+        } else if(todo.state === 'in progress') {
+            const nouvelleTodo = 
+            `<div class="item-todo-state">
+                <div class="setTodo">
+                    <div class="change-state">
+                        <label for="changestate-${todo.id}"></label>
+                        <input type="checkbox" value="changestate" name="changestate" id="changestate-${todo.id}" class="checkbox-change-state">
+                    </div>
+                </div>
+                <div class="todo ${todo.timelimit}" id="${todo.id}">
+                    <div class="todo-content">
+                        <h3 class="todo-title">${todo.title}</h3>
+                        <p class="todo-description">${todo.description}</p>
+                    </div>
+                </div>
+            </div>`
+            document
+          .getElementById("inprogress")
+          .insertAdjacentHTML("afterbegin", nouvelleTodo);
+
+          /*Si le state de la todo est "done" on crée une constante avec les infos et on 
+        l'insère dans la div done*/
+        } else {
+            const nouvelleTodo =
+            `<div class="item-todo-state">
+                <div class="setTodo">
+                    <div class="change-state">
+                        <label for="changestate-${todo.id}"></label>
+                        <input type="checkbox" value="changestate" name="changestate" id="changestate-${todo.id}" class="checkbox-change-state">
+                    </div>
+                </div>
+                <div class="todo done ${todo.timelimit}" id="${todo.id}">
+                    <div class="todo-content">
+                        <h3 class="todo-title">${todo.title}</h3>
+                        <p class="todo-description">${todo.description}</p>
+                    </div>
+                </div>
+            </div>`
+            document
+          .getElementById("done")
+          .insertAdjacentHTML("afterbegin", nouvelleTodo);
+        }
+    }
+}
